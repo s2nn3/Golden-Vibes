@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Vibes | Summer Scrapbook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Fonts: Permanent Marker (Titular), Patrick Hand (Manuscrita), Courier Prime (Datos) -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'paper': '#fdfbf7',
+                        'paper-dark': '#f0e6d2',
+                        'ink': '#2c3e50',
+                        'marker-yellow': '#fff475',
+                        'marker-pink': '#ffaad4',
+                        'marker-blue': '#a5d8ff',
+                        'marker-green': '#ccff90',
+                        'tape': 'rgba(255, 255, 255, 0.4)',
+                    },
+                    fontFamily: {
+                        display: ['Permanent Marker', 'cursive'],
+                        hand: ['Patrick Hand', 'cursive'],
+                        mono: ['Courier Prime', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'grid-paper': "radial-gradient(#d1d5db 1px, transparent 1px)",
+                        'lined-paper': "repeating-linear-gradient(transparent, transparent 29px, #e5e7eb 30px)",
+                        'cork': "url('https://www.transparenttextures.com/patterns/cork-board.png')",
+                    },
+                    boxShadow: {
+                        'paper': '2px 3px 5px rgba(0,0,0,0.1), 1px 1px 1px rgba(0,0,0,0.05)',
+                        'floating': '10px 10px 0px rgba(0,0,0,0.1)',
+                        'polaroid': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 10px #fff',
+                    },
+                    rotate: {
+                        '1': '1deg',
+                        '2': '2deg',
+                        '3': '3deg',
+                        '-1': '-1deg',
+                        '-2': '-2deg',
+                        '-3': '-3deg',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            background-color: #fdfbf7; 
+            background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #2c3e50;
+            overflow-x: hidden;
+        }
+
+        /* Washi Tape Effect */
+        .tape {
+            background-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            backdrop-filter: blur(2px);
+            position: absolute;
+            z-index: 10;
+        }
+        
+        .tape-top {
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 100px;
+            height: 30px;
+        }
+
+        .tape-corner {
+            top: -10px;
+            right: -10px;
+            transform: rotate(45deg);
+            width: 60px;
+            height: 25px;
+            background-color: #ffaad4;
+            opacity: 0.7;
+        }
+
+        /* Highlighter Effect */
+        .highlight {
+            background: linear-gradient(120deg, #fff475 0%, #fff475 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 80%;
+            display: inline;
+        }
+
+        .highlight-pink {
+            background: linear-gradient(120deg, #ffaad4 0%, #ffaad4 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 80%;
+        }
+
+        /* Handwritten underline animation */
+        .scribble-underline {
+            position: relative;
+        }
+        .scribble-underline::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 6px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10' preserveAspectRatio='none'%3E%3Cpath d='M0 5 Q 50 10 100 5 T 200 5' stroke='%23ffaad4' stroke-width='3' fill='none'/%3E%3C/svg%3E") no-repeat center;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-marker-yellow selection:text-ink">
+
+    <!-- Navigation (Sticker Style) -->
+    <nav class="fixed w-full z-50 top-4 px-4 pointer-events-none">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo Sticker -->
+            <a href="#" class="pointer-events-auto transform -rotate-2 hover:rotate-0 transition duration-300">
+                <div class="bg-white px-6 py-3 shadow-floating border-2 border-black">
+                    <span class="font-display text-2xl tracking-tight">Golden<span class="text-marker-pink">Vibes</span></span>
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-16 h-6 bg-marker-blue/50 rotate-1"></div>
+                </div>
+            </a>
+
+            <!-- Menu Notebook -->
+            <div class="pointer-events-auto hidden md:block bg-white border-2 border-black p-1 shadow-floating transform rotate-1">
+                <div class="border border-dashed border-gray-400 p-2 flex gap-6 font-hand text-xl font-bold">
+                    <a href="#diario" class="hover:text-marker-pink hover:underline decoration-wavy">El Diario</a>
+                    <a href="#alojamiento" class="hover:text-marker-pink hover:underline decoration-wavy">El Refugio</a>
+                    <a href="#seguridad" class="hover:text-marker-pink hover:underline decoration-wavy">Zona Segura</a>
+                    <a href="#ticket" class="hover:text-marker-pink hover:underline decoration-wavy">Ticket</a>
+                </div>
+            </div>
+
+            <button id="mobile-menu-btn" class="pointer-events-auto md:hidden bg-marker-yellow border-2 border-black w-12 h-12 rounded-full shadow-floating flex items-center justify-center text-xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Note -->
+        <div id="mobile-menu" class="hidden pointer-events-auto absolute top-20 right-4 bg-yellow-100 w-64 p-6 shadow-paper transform rotate-2 font-hand text-2xl border border-yellow-200">
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-24 h-8 bg-tape/50 rotate-1"></div>
+            <ul class="space-y-4 text-center">
+                <li><a href="#diario" class="block hover:bg-yellow-200 p-2 rounded">El Plan</a></li>
+                <li><a href="#alojamiento" class="block hover:bg-yellow-200 p-2 rounded">Alojamiento</a></li>
+                <li><a href="#seguridad" class="block hover:bg-yellow-200 p-2 rounded">Seguridad</a></li>
+                <li><a href="#ticket" class="block font-bold bg-white border-2 border-dashed border-black p-2 transform -rotate-1">Reservar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Scrapbook Page) -->
+    <header class="relative pt-32 pb-20 px-4 min-h-screen flex flex-col justify-center items-center overflow-hidden">
+        
+        <!-- Background Doodles -->
+        <div class="absolute top-20 left-10 transform -rotate-12 opacity-80 hidden lg:block animate-bounce" style="animation-duration: 3s;">
+            <img src="https://cdn-icons-png.flaticon.com/512/4392/4392520.png" class="w-24 h-24" alt="Sun Doodle">
+        </div>
+        <div class="absolute bottom-20 right-10 transform rotate-12 opacity-80 hidden lg:block">
+            <img src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png" class="w-32 h-32" alt="Palm Tree Doodle">
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            
+            <div class="bg-white p-6 shadow-polaroid transform rotate-2 inline-block mb-8 relative">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-marker-pink/50 rotate-1"></div>
+                <img src="https://images.unsplash.com/photo-1520116468816-95b69f847357?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-64 h-48 object-cover grayscale contrast-125 mb-4">
+                <p class="font-hand text-2xl">Best. Summer. Ever.</p>
+            </div>
+
+            <h1 class="text-6xl md:text-8xl font-display leading-none mb-6 text-ink transform -rotate-2">
+                GOLDEN <br> 
+                <span class="highlight relative">VIBES 2025</span>
+            </h1>
+
+            <div class="bg-yellow-100 p-6 shadow-paper max-w-lg mx-auto transform rotate-1 border border-yellow-200 relative">
+                <div class="absolute -top-3 right-10 w-4 h-4 rounded-full bg-red-400 shadow-sm"></div> <!-- Pushpin -->
+                <p class="font-hand text-2xl leading-relaxed">
+                    Querido diario:
+                    <br>
+                    Este julio me voy a Mallorca. 7 días. 
+                    <span class="font-bold border-b-2 border-black">Sin padres.</span> 
+                    Solo mis amigos, el mar y mucha adrenalina.
+                    <br>
+                    <span class="text-sm text-gray-500 font-mono mt-2 block">Valencia -> Mallorca // Todo Incluido</span>
+                </p>
+            </div>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="#ticket" class="group relative inline-block focus:outline-none focus:ring">
+                    <span class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-marker-green transition-transform group-hover:translate-y-0 group-hover:translate-x-0 border-2 border-black"></span>
+                    <span class="relative inline-block border-2 border-black bg-white px-8 py-3 text-xl font-bold font-mono tracking-widest uppercase group-active:text-opacity-75">
+                        ¡Me Apunto!
+                    </span>
+                </a>
+                <a href="#diario" class="font-hand text-2xl underline decoration-wavy decoration-marker-blue underline-offset-4 hover:text-marker-blue transition">
+                    Ver el plan completo ->
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Manifesto / Post-it Wall -->
+    <section class="py-20 px-4 bg-paper-dark border-t-4 border-dashed border-gray-300 relative">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl font-display text-center mb-12 transform rotate-1 text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">¿Por qué este viaje?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Post-it 1 -->
+                <div class="bg-yellow-200 p-6 shadow-paper transform -rotate-2 relative h-64 flex items-center justify-center text-center">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-24 h-8 bg-tape/40 rotate-1"></div>
+                    <div>
+                        <i class="fas fa-ship text-4xl mb-4 text-ink"></i>
+                        <h3 class="font-hand text-3xl font-bold mb-2">Modo Viaje</h3>
+                        <p class="font-hand text-xl">Salimos en ferry. La aventura empieza en el puerto, no en la isla.</p>
+                    </div>
+                </div>
+
+                <!-- Post-it 2 -->
+                <div class="bg-blue-200 p-6 shadow-paper transform rotate-2 relative h-64 flex items-center justify-center text-center mt-8 md:mt-0">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-24 h-8 bg-tape/40 -rotate-2"></div>
+                     <div class="absolute -right-2 top-10 w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white font-bold font-mono text-xs transform rotate-12 shadow-md">SAFE</div>
+                    <div>
+                        <i class="fas fa-shield-alt text-4xl mb-4 text-ink"></i>
+                        <h3 class="font-hand text-3xl font-bold mb-2">Cero Estrés</h3>
+                        <p class="font-hand text-xl">Monitores 24h. Tus padres tranquilos, tú a tu rollo (pero seguro).</p>
+                    </div>
+                </div>
+
+                <!-- Post-it 3 -->
+                <div class="bg-pink-200 p-6 shadow-paper transform -rotate-1 relative h-64 flex items-center justify-center text-center">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-24 h-8 bg-tape/40 rotate-1"></div>
+                    <div>
+                        <i class="fas fa-camera-retro text-4xl mb-4 text-ink"></i>
+                        <h3 class="font-hand text-3xl font-bold mb-2">Memories</h3>
+                        <p class="font-hand text-xl">Desconexión digital para conexión real. Fotos mentales (y reales).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Journal (Expanded Itinerary from PDF) -->
+    <section id="diario" class="py-24 px-4 bg-white relative">
+        <!-- Lined Paper Background -->
+        <div class="absolute inset-0 bg-lined-paper opacity-50 pointer-events-none"></div>
+        <div class="absolute left-8 top-0 bottom-0 w-1 bg-red-300 opacity-50 hidden md:block"></div> <!-- Margin Line -->
+
+        <div class="max-w-4xl mx-auto relative z-10 pl-4 md:pl-16">
+            <h2 class="text-5xl font-display mb-12 highlight-pink">Mi Diario de Ruta</h2>
+
+            <div class="space-y-16">
+                <!-- Day 1: El Inicio -->
+                <div class="flex gap-6 items-start group">
+                    <div class="font-mono text-4xl font-bold text-gray-300 group-hover:text-marker-blue transition">01</div>
+                    <div>
+                        <h3 class="font-hand text-3xl font-bold transform -rotate-1">El Inicio de la Aventura 🚢</h3>
+                        <p class="font-mono text-sm text-gray-500 mb-2">19:00h // Estación Marítima Valencia</p>
+                        <p class="font-hand text-xl leading-relaxed">
+                            Punto de encuentro en el Mostrador de Balearia. Nos dan las camisetas y hacemos el check-in.
+                            <br>
+                            A las <strong>22:15h</strong> zarpamos. Cena picnic en la cubierta (traída de casa) y dinámicas "Rompehielos" para conocernos. ¡Noche a bordo!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Day 2: Llegada y Asentamiento -->
+                <div class="flex gap-6 items-start group">
+                    <div class="font-mono text-4xl font-bold text-gray-300 group-hover:text-marker-green transition">02</div>
+                    <div>
+                        <h3 class="font-hand text-3xl font-bold transform rotate-1">Aterrizaje en el Paraíso 🏝️</h3>
+                        <p class="font-mono text-sm text-gray-500 mb-2">06:15h // Puerto de Palma -> Alcúdia</p>
+                        <p class="font-hand text-xl leading-relaxed">
+                            Desembarque y bus privado directo al <strong>Albergue Campamento de la Victoria</strong>. 
+                            Por la mañana, ruta suave de senderismo y snorkel por la costa. Tarde de playa para descansar del barco.
+                            <br>
+                            <span class="bg-marker-yellow px-1">21:00h:</span> Velada nocturna "La Misión de la Semana".
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Day 3: Adrenalina -->
+                <div class="flex gap-6 items-start group">
+                    <div class="font-mono text-4xl font-bold text-gray-300 group-hover:text-marker-pink transition">03</div>
+                    <div>
+                        <h3 class="font-hand text-3xl font-bold transform -rotate-1">Adrenalina en el Norte 🧗</h3>
+                        <p class="font-mono text-sm text-gray-500 mb-2">09:30h // Costa Norte</p>
+                        <p class="font-hand text-xl leading-relaxed">
+                            Hoy toca <strong>Coasteering</strong> con los pros de <em>Món d'Aventura</em>. Saltos al agua, escalada (psicobloc) y rápel acuático.
+                            <br>
+                            Por la tarde (17:00h), aprendemos nudos marineros y cómo construir balsas en la cala del albergue.
+                        </p>
+                        <div class="mt-4 transform rotate-2 inline-block bg-white p-2 border border-gray-300 shadow-sm">
+                            <span class="font-mono text-xs bg-black text-white px-1">NOTE</span>
+                            <span class="font-hand text-sm">Casco y neopreno incluidos ✅</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 4: Exploración Marina -->
+                <div class="flex gap-6 items-start group">
+                    <div class="font-mono text-4xl font-bold text-gray-300 group-hover:text-marker-blue transition">04</div>
+                    <div>
+                        <h3 class="font-hand text-3xl font-bold transform rotate-1">Exploración Marina y Cultural 🛶</h3>
+                        <p class="font-mono text-sm text-gray-500 mb-2">10:00h // Bahía de Pollensa</p>
+                        <p class="font-hand text-xl leading-relaxed">
+                            Ruta guiada en Kayak y Paddle Surf. Entramos en la <strong>Cova Blava</strong>, una cueva marina increíble.
+                            <br>
+                            A las 17:00h, nos vamos al pueblo de Alcúdia para una Gymkhana fotográfica por las murallas romanas.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Day 5: Splash World -->
+                <div class="flex gap-6 items-start group">
+                    <div class="font-mono text-4xl font-bold text-gray-300 group-hover:text-marker-yellow transition">05</div>
+                    <div>
+                        <h3 class="font-hand text-3xl font-bold transform -rotate-1">SPLASH WORLD! 🎢</h3>
+                        <p class="font-mono text-sm text-gray-500 mb-2">Sa Coma // Globales Bouganvilla</p>
+                        <p class="font-hand text-xl leading-relaxed">
+                            Excursión de día completo (09:00h - 19:00h). Parque acuático con toboganes gigantes: Kamikaze, Black Hole, Multi-slide... 
+                            <br>
+                            ¡Y lo mejor! <span class="highlight">Comida buffet incluida</span>. Día de desenfreno total.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Day 6: Despedida -->
+                <div class="flex gap-6 items-start group">
+                    <div class="font-mono text-4xl font-bold text-gray-300 group-hover:text-marker-green transition">06</div>
+                    <div>
+                        <h3 class="font-hand text-3xl font-bold transform rotate-1">The Sea Challenge 🏆</h3>
+                        <p class="font-mono text-sm text-gray-500 mb-2">Albergue La Victoria</p>
+                        <p class="font-hand text-xl leading-relaxed">
+                            Competición de balsas por equipos y regata final. 
+                            A las 14:00h, <strong>Paella de Despedida</strong> y entrega de premios. 
+                            <br>
+                            Noche de Fiesta Final con música y fotos de la semana.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Day 7: Regreso -->
+                <div class="flex gap-6 items-start group">
+                    <div class="font-mono text-4xl font-bold text-gray-300 group-hover:text-marker-pink transition">07</div>
+                    <div>
+                        <h3 class="font-hand text-3xl font-bold transform -rotate-1">Regreso a Casa 🏠</h3>
+                        <p class="font-mono text-sm text-gray-500 mb-2">11:30h // Ferry de Vuelta</p>
+                        <p class="font-hand text-xl leading-relaxed">
+                            Transfer al Puerto de Palma. Embarcamos en la travesía diurna (comida en el barco).
+                            <br>
+                            Llegada a Valencia a las <strong>19:30h</strong>. Fin del viaje :(
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: El Refugio (Replaces Recuerdos Photo Wall) -->
+    <section id="alojamiento" class="py-24 px-4 bg-cork relative shadow-inner">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl font-display text-center mb-16 bg-white inline-block px-4 py-2 transform rotate-2 shadow-paper border-2 border-black">
+                El Refugio y Logística
+            </h2>
+
+            <div class="flex flex-wrap justify-center gap-12">
+                <!-- Postcard: Hostel -->
+                <div class="bg-white p-4 shadow-polaroid transform -rotate-2 w-80 relative">
+                    <div class="border-b-2 border-gray-200 pb-2 mb-2 flex justify-between items-center">
+                        <span class="font-mono text-xs text-gray-400">POSTCARD</span>
+                        <div class="w-12 h-16 border-2 border-dashed border-gray-300 flex items-center justify-center">
+                            <span class="text-xs font-mono rotate-12">STAMP</span>
+                        </div>
+                    </div>
+                    <div class="h-40 bg-blue-100 mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="object-cover w-full h-full grayscale hover:grayscale-0 transition duration-500">
+                    </div>
+                    <h3 class="font-hand text-2xl font-bold">Albergue La Victoria</h3>
+                    <p class="font-hand text-lg mt-2">Dormir entre pinos y despertar frente al mar. Acceso directo a calas. ¡Pensión Completa!</p>
+                    <p class="font-mono text-xs text-right mt-4 text-gray-400">Alcúdia, Mallorca</p>
+                </div>
+
+                <!-- Ticket: Ferry -->
+                <div class="bg-yellow-100 p-6 shadow-paper w-80 transform rotate-1 relative border-l-8 border-blue-500">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-gray-400 shadow-sm border border-gray-500"></div>
+                    <h3 class="font-display text-2xl mb-2">Ferry Balearia</h3>
+                    <div class="font-mono text-sm space-y-2 border-t border-black pt-2">
+                        <div class="flex justify-between">
+                            <span>ORIGEN:</span> <span>VALENCIA</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>DESTINO:</span> <span>PALMA</span>
+                        </div>
+                        <div class="flex justify-between font-bold">
+                            <span>SALIDA:</span> <span>22:15h</span>
+                        </div>
+                    </div>
+                    <p class="font-hand text-xl mt-4 text-center">"La noche en barco es parte de la aventura"</p>
+                </div>
+
+                <!-- Ticket: Bus -->
+                <div class="bg-white p-6 shadow-paper w-80 transform -rotate-1 border-2 border-dashed border-black relative">
+                    <div class="absolute -right-4 top-10 w-24 h-8 bg-tape/50 rotate-45"></div>
+                    <h3 class="font-display text-2xl mb-2 text-red-500">Roig Bus</h3>
+                    <p class="font-mono text-xs mb-4">SERVICIO DISCRECIONAL PRIVADO</p>
+                    <ul class="font-hand text-lg list-disc pl-5">
+                        <li>Puerto -> Albergue</li>
+                        <li>Excursión Splash World</li>
+                        <li>Transfers Actividades</li>
+                        <li>Albergue -> Puerto</li>
+                    </ul>
+                    <div class="mt-4 text-center">
+                        <i class="fas fa-bus text-4xl text-ink"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Zona Segura (Replaces The Team) -->
+    <section id="seguridad" class="py-24 px-4 bg-paper relative">
+        <div class="max-w-4xl mx-auto bg-white border-4 border-black p-8 shadow-floating transform rotate-1 relative">
+            <!-- Warning Tape Graphic -->
+            <div class="absolute -top-5 left-0 w-full h-10 bg-yellow-400 flex items-center justify-center overflow-hidden border-y-2 border-black transform -rotate-1">
+                <span class="font-mono font-bold tracking-widest text-black">SEGURIDAD // SAFETY FIRST // SEGURIDAD // SAFETY FIRST</span>
+            </div>
+
+            <h2 class="font-display text-5xl mt-8 mb-8 text-center text-ink">Zona Segura</h2>
+            <p class="font-hand text-2xl text-center mb-10">Para que tus padres duerman tranquilos.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Check 1 -->
+                <div class="flex gap-4 items-start">
+                    <div class="text-green-500 text-3xl"><i class="fas fa-check-square"></i></div>
+                    <div>
+                        <h3 class="font-bold font-mono text-lg uppercase">Ratio 1:10</h3>
+                        <p class="font-hand text-xl">1 monitor por cada 10 alumnos + 1 Coordinador General libre. Supervisión constante.</p>
+                    </div>
+                </div>
+
+                <!-- Check 2 -->
+                <div class="flex gap-4 items-start">
+                    <div class="text-green-500 text-3xl"><i class="fas fa-check-square"></i></div>
+                    <div>
+                        <h3 class="font-bold font-mono text-lg uppercase">Seguros Premium</h3>
+                        <p class="font-hand text-xl">Pólizas de Responsabilidad Civil (600.000€) y Accidentes incluidas.</p>
+                    </div>
+                </div>
+
+                <!-- Check 3 -->
+                <div class="flex gap-4 items-start">
+                    <div class="text-green-500 text-3xl"><i class="fas fa-check-square"></i></div>
+                    <div>
+                        <h3 class="font-bold font-mono text-lg uppercase">Protocolo PAS</h3>
+                        <p class="font-hand text-xl">Proteger, Alertar, Socorrer. Monitores con móviles y contactos de emergencia (112, Hospital de Muro).</p>
+                    </div>
+                </div>
+
+                <!-- Check 4 -->
+                <div class="flex gap-4 items-start">
+                    <div class="text-green-500 text-3xl"><i class="fas fa-check-square"></i></div>
+                    <div>
+                        <h3 class="font-bold font-mono text-lg uppercase">Profesionales</h3>
+                        <p class="font-hand text-xl">Monitores titulados en ocio y tiempo libre + técnicos especialistas para Coasteering.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center pt-6 border-t-2 border-dashed border-gray-300">
+                <span class="font-mono text-xs bg-black text-white px-2 py-1">CERTIFICADO NEGATIVO DELITOS SEXUALES: OK</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing (Receipt Style) -->
+    <section id="ticket" class="py-24 px-4 bg-gray-100 flex justify-center">
+        <div class="bg-white p-8 w-full max-w-md shadow-paper relative">
+            <!-- Receipt Jagged Top -->
+            <div class="absolute top-0 left-0 w-full h-4 bg-gray-100" style="clip-path: polygon(0 0, 5% 100%, 10% 0, 15% 100%, 20% 0, 25% 100%, 30% 0, 35% 100%, 40% 0, 45% 100%, 50% 0, 55% 100%, 60% 0, 65% 100%, 70% 0, 75% 100%, 80% 0, 85% 100%, 90% 0, 95% 100%, 100% 0);"></div>
+            <!-- Receipt Jagged Bottom -->
+            <div class="absolute bottom-0 left-0 w-full h-4 bg-gray-100" style="clip-path: polygon(0 100%, 5% 0, 10% 100%, 15% 0, 20% 100%, 25% 0, 30% 100%, 35% 0, 40% 100%, 45% 0, 50% 100%, 55% 0, 60% 100%, 65% 0, 70% 100%, 75% 0, 80% 100%, 85% 0, 90% 100%, 95% 0, 100% 100%);"></div>
+
+            <div class="text-center font-mono border-b-2 border-dashed border-gray-300 pb-6 mt-4">
+                <h2 class="text-3xl font-bold mb-2">GOLDEN VIBES</h2>
+                <p class="text-xs">Valencia -> Mallorca</p>
+                <p class="text-xs">Ticket #GV-2025-001</p>
+            </div>
+
+            <div class="py-6 font-mono text-sm space-y-3">
+                <div class="flex justify-between">
+                    <span>1x FERRY TICKET (I/V)</span>
+                    <span>INCL.</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>5x ALOJAMIENTO PENSION COMPLETA</span>
+                    <span>INCL.</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>1x ENTRADA SPLASH WORLD</span>
+                    <span>INCL.</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>1x PACK MULTIAVENTURA</span>
+                    <span>INCL.</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>1x TRANSPORTE PRIVADO ISLA</span>
+                    <span>INCL.</span>
+                </div>
+            </div>
+
+            <div class="border-t-2 border-black pt-4 mb-8">
+                <div class="flex justify-between items-end">
+                    <span class="font-mono font-bold text-xl">TOTAL</span>
+                    <span class="font-display text-5xl transform -rotate-2">595€</span>
+                </div>
+                <p class="text-center font-mono text-xs mt-2 text-gray-500">*Pago fraccionado disponible</p>
+            </div>
+
+            <button class="w-full bg-black text-white font-mono font-bold py-4 hover:bg-gray-800 transition">
+                CONFIRMAR PLAZA
+            </button>
+            
+            <div class="mt-6 text-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" class="w-24 h-24 mx-auto opacity-80">
+                <p class="font-mono text-xs mt-2">SCAN TO PAY</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t-2 border-black py-12 text-center font-mono text-sm relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid-paper opacity-50 pointer-events-none"></div>
+        <p class="relative z-10 mb-4 font-bold">Hecho con <i class="fas fa-heart text-red-500 animate-pulse"></i> en Valencia</p>
+        <p class="relative z-10 text-gray-500">Adrián Taroncher • Alberto Bernal • Marcos Muñoz</p>
+        <p class="relative z-10 mt-8 text-xs">© 2025 Golden Vibes Project.</p>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
